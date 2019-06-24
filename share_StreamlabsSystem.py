@@ -32,7 +32,7 @@ def Init():
             settings = json.load(f, encoding="utf-8")
     except:
         settings = {
-            "command": "!sharefritten",
+            "command": "!share",
             "minimumAmount": 100,
             "languageErrorMissingArgument": "Error! Please type a argument behind the command: {0} 5000",
             "languageErrorNotEnoughCurrency": "You don't have {0} {1}!",
