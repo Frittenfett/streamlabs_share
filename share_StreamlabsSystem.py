@@ -37,7 +37,7 @@ def Init():
             "languageErrorMissingArgument": "Error! Please type a argument behind the command: {0} 5000",
             "languageErrorNotEnoughCurrency": "You don't have {0} {1}!",
             "languageErrorLessMinimumAmount": "Error! The amount to share should be bigger than {0} {1}!",
-            "languageDone": "{0} shared {1} {2} to EVERYONE. ( {3} {2} per person ).",
+            "languageDone": "{0} shared {1} {2} to EVERYONE! ( {3} {2} per person )",
         }
     return
 
@@ -52,7 +52,6 @@ def Execute(data):
         username = Parent.GetDisplayName(user)
 
         if (data.GetParam(0).lower() == settings["command"]):
-
             if data.GetParamCount() < 1:
                 Parent.SendTwitchMessage(settings["languageErrorMissingArgument"].format(settings["command"]))
                 return
@@ -76,7 +75,6 @@ def Execute(data):
             viewerDict = {}
             for viewer in viewerList:
                 viewerDict[viewer] = pricePerPerson
-
             Parent.RemovePoints(user, currencyToShare)
             Parent.AddPointsAll(viewerDict)
             Parent.SendTwitchMessage(settings["languageDone"].format(username, str(currencyToShare), Parent.GetCurrencyName(), pricePerPerson))
