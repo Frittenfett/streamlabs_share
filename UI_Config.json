@@ -1,0 +1,45 @@
+﻿{
+  "output_file": "settings.json",
+  "command": {
+    "type": "textbox",
+    "value": "!share",
+    "label": "Share command",
+    "tooltip": "Command for sharing currency. Default !share",
+    "group": "General"
+  },
+  "minimumAmount": {
+    "type": "numberbox",
+    "value": 100,
+    "label": "Global Cooldown",
+    "tooltip": "",
+    "group": "General"
+  },
+  "languageErrorMissingArgument": {
+    "type": "textbox",
+    "value": "Error! Please type a argument behind the command: {0} 5000",
+    "label": "languageErrorMissingArgument",
+    "tooltip": "",
+    "group": "Language"
+  },
+  "languageErrorNotEnoughCurrency": {
+    "type": "textbox",
+    "value": "You don't have {0} {1}!.",
+    "label": "languageErrorNotEnoughCurrency",
+    "tooltip": "",
+    "group": "Language"
+  },
+  "languageErrorLessMinimumAmount": {
+    "type": "textbox",
+    "value": "Error! The amount to share should be bigger than {0} {1}!",
+    "label": "languageErrorLessMinimumAmount",
+    "tooltip": "",
+    "group": "Language"
+  },
+  "languageDone": {
+    "type": "textbox",
+    "value": "{0} shared {1} {2} to EVERYONE. ( {3} {2} per person ).",
+    "label": "languageDone",
+    "tooltip": "",
+    "group": "Language"
+  },
+}
