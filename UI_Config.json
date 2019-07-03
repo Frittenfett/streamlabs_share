@@ -7,6 +7,13 @@
     "tooltip": "Command for sharing currency. Default !share",
     "group": "General"
   },
+  "showWinnerNames": {
+    "type": "checkbox",
+    "value": false,
+    "label": "Show winner usernames",
+    "tooltip": "Show winner usernames",
+    "group": "General"
+  },
   "minimumAmount": {
     "type": "numberbox",
     "value": 100,
@@ -39,6 +46,13 @@
     "type": "textbox",
     "value": "{0} shared {1} {2} to EVERYONE. ( {3} {2} per person ).",
     "label": "languageDone",
+    "tooltip": "",
+    "group": "Language"
+  },
+  "languageWinners": {
+    "type": "textbox",
+    "value": "The lucky are: {0}.",
+    "label": "languageWinners",
     "tooltip": "",
     "group": "Language"
   },

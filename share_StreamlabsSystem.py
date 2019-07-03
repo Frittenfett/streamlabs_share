@@ -17,7 +17,7 @@ ScriptName = "Share"
 Website = "https://www.twitch.tv/frittenfettsenpai"
 Description = "Share currency to all viewers."
 Creator = "frittenfettsenpai"
-Version = "1.0.0"
+Version = "1.0.1"
 
 
 # ---------------------------------------
@@ -34,10 +34,12 @@ def Init():
         settings = {
             "command": "!share",
             "minimumAmount": 100,
+            "showWinnerNames": False,
             "languageErrorMissingArgument": "Error! Please type a argument behind the command: {0} 5000",
             "languageErrorNotEnoughCurrency": "You don't have {0} {1}!",
             "languageErrorLessMinimumAmount": "Error! The amount to share should be bigger than {0} {1}!",
-            "languageDone": "{0} shared {1} {2} to EVERYONE! ( {3} {2} per person )",
+            "languageDone": "{0} shared {1} {2} to EVERYONE! ( {3} {2} per person [ {4} Viewers ])",
+            "languageWinners": "The lucky are: {0}",
         }
     return
 
@@ -65,7 +67,7 @@ def Execute(data):
                 Parent.SendTwitchMessage(settings["languageErrorNotEnoughCurrency"].format(str(currencyToShare), Parent.GetCurrencyName()))
                 return
 
-            viewerList = Parent.GetViewerList()
+            viewerList = Parent.GetActiveUsers()
             viewerCount = len(viewerList)
             pricePerPerson = int(currencyToShare / viewerCount)
 
@@ -77,7 +79,9 @@ def Execute(data):
                 viewerDict[viewer] = pricePerPerson
             Parent.RemovePoints(user, currencyToShare)
             Parent.AddPointsAll(viewerDict)
-            Parent.SendTwitchMessage(settings["languageDone"].format(username, str(currencyToShare), Parent.GetCurrencyName(), pricePerPerson))
+            Parent.SendTwitchMessage(settings["languageDone"].format(username, str(currencyToShare), Parent.GetCurrencyName(), pricePerPerson, str(viewerCount)))
+            if settings["showWinnerNames"]:
+                Parent.SendTwitchMessage(settings["languageWinners"].format(' '.join(viewerList)))
     return
 
 
