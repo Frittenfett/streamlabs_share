@@ -7,6 +7,13 @@
     "tooltip": "Command for sharing currency. Default !share",
     "group": "General"
   },
+  "userBlackList": {
+    "type": "textbox",
+    "value": "",
+    "label": "User BlackList",
+    "tooltip": "Commaseperated list to exclude usernames",
+    "group": "General"
+  },
   "showWinnerNames": {
     "type": "checkbox",
     "value": false,

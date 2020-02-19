@@ -34,6 +34,7 @@ def Init():
         settings = {
             "command": "!share",
             "minimumAmount": 100,
+            "userBlackList": "",
             "showWinnerNames": False,
             "languageErrorMissingArgument": "Error! Please type a argument behind the command: {0} 5000",
             "languageErrorNotEnoughCurrency": "You don't have {0} {1}!",
@@ -67,21 +68,27 @@ def Execute(data):
                 Parent.SendTwitchMessage(settings["languageErrorNotEnoughCurrency"].format(str(currencyToShare), Parent.GetCurrencyName()))
                 return
 
-            viewerList = Parent.GetActiveUsers()
+            userBlackList = settings["userBlackList"].split(",")
+
+            viewerListRaw = Parent.GetActiveUsers()
+            viewerList = []
+            for viewer in viewerListRaw:
+                if viewer != username.lower() and viewer not in userBlackList:
+                    viewerList.append(viewer)
+
             viewerCount = len(viewerList)
             pricePerPerson = int(currencyToShare / viewerCount)
-
             if pricePerPerson < 1:
                 pricePerPerson = 1
 
-            viewerDict = {}
-            for viewer in viewerList:
-                viewerDict[viewer] = pricePerPerson
-            Parent.RemovePoints(user, currencyToShare)
-            Parent.AddPointsAll(viewerDict)
-            Parent.SendTwitchMessage(settings["languageDone"].format(username, str(currencyToShare), Parent.GetCurrencyName(), pricePerPerson, str(viewerCount)))
-            if settings["showWinnerNames"]:
-                Parent.SendTwitchMessage(settings["languageWinners"].format(' '.join(viewerList)))
+            if len(viewerList) > 0:
+                Parent.RemovePoints(user, currencyToShare)
+                for viewer in viewerList:
+                    Parent.AddPoints(viewer, pricePerPerson)
+
+                Parent.SendTwitchMessage(settings["languageDone"].format(username, str(currencyToShare), Parent.GetCurrencyName(), pricePerPerson, str(viewerCount)))
+                if settings["showWinnerNames"]:
+                    Parent.SendTwitchMessage(settings["languageWinners"].format(' '.join(viewerList)))
     return
 
 

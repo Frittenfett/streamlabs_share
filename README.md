@@ -9,5 +9,5 @@ If you type !share 10000, you will lose 10000 currency but a command "!points ad
 
 
 ### Changelog
-* v1.0.1 Use active viewers... not normal viewers. So much bots... So much hate...
-* v1.0.0 Major Release
+* v1.1.0 User Blacklist
+* v1.1.0 Major Release
